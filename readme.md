@@ -29,6 +29,14 @@ Otherwise, you can install brest globally with npm and have it available from an
 
 JSON schema is quite unstable for now: it doesn't support internal links by #id's, some properties may be missing, etc…
 
+##Changes
+
+#### 0.0.1-1
+Dependencies fix
+
+#### 0.0.1
+Here goes the Docker…
+
 ##MIT License
 
 Copyright © 2013 Maxim Tovstashev <max.kitsch@gmail.com>
