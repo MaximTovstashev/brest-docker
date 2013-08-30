@@ -1,0 +1,46 @@
+doctype 5
+html
+    include includes/head
+    body
+        h1.page-header
+            a(href="index.html") #{data.project.projectName}
+            |&nbsp;API reference
+        div.container-fluid
+            div.row-fluid
+                div.span2
+                    - var resources = data.names
+                    include includes/menu
+                div.span10
+                    h2 #{current}
+                    div!= api.description
+                    -var methodIndex = 1
+                    each resource in api.resources
+                        -methodIndex++
+                        div.well.description
+                            if resource.stub
+                                span.stub.label.label-warning STUB
+                            if resource.obsolete
+                                span.obsolete.label.label-warning Obsolete
+                            if resource.noAuth
+                                span.noAuth.label.label-important No Auth
+                            h4 #{resource.method}: /v#{api.version}/#{current}/#{resource.uri}
+                            if resource.filters
+                                hr
+                                h5 Filters
+                                div.inset
+                                    dl
+                                    each filter, name in resource.filters
+                                        dt #{name}
+                                        dd #{filter}
+                            if resource.schema
+                                include mixins/schema
+                                mixin schemaBlock(schemas[resource.schema],resource.schema,methodIndex)
+                            hr
+                            h5 Description
+                            div.inset!= resource.description
+
+    script(src="js/jquery.min.js")
+    script(src="js/bootstrap.min.js")
+    script $('.stub').tooltip({title: "This method is stub and will be implemented later"});
+    script $('.obsolete').tooltip({title: "This method is obsolete and will be removed soon"});
+    script $('.noAuth').tooltip({title: "No authorization required for this method. Anyone can use it!"});

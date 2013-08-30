@@ -1,0 +1,31 @@
+h2 {
+    text-transform: capitalize;
+}
+
+.even {
+    background-color: #cccccc;
+}
+
+.odd {
+    background-color: #dddddd;
+}
+
+.propertyBlock {
+    margin-top: 10px;
+}
+
+.inset {
+    margin-left: 10px;
+}
+
+.description hr {
+    background-color:#777;
+    border-width: 0pt;
+    color:#ccc;
+    height:2px;
+    line-height:0;
+    margin: .5em 10px 0 -.3em;
+    page-break-after:always;
+    text-align:left;
+    width:90%;
+}

@@ -1,0 +1,15 @@
+doctype 5
+html
+    include includes/head
+    body
+        h1.page-header #{data.project.projectName} API reference
+        div.container-fluid
+            div.row-fluid
+                div.span2
+                    - var resources = data.names
+                    include includes/menu
+                div.span10
+                    include index.html
+
+    script(src="js/jquery.min.js")
+    script(src="js/bootstrap.min.js")

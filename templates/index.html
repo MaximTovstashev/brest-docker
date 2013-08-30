@@ -1,0 +1,28 @@
+<h3>What the hell do I see?</h3>
+<p>
+    This is REST API description document, built automatically. The
+    documentation is being automatically rebuilt each time the server is restarted.
+</p>
+<p>
+    While methods, URI files and validation is parsed from API files, the descriptions are added by hand, which
+    means that they can be outdated or otherwise misguiding. Please note that in case of doubt and contact the
+    developer for up-to-date info.
+</p>
+
+<h3>What can I do?</h3>
+<p>For each API resource add "description" property. It can be either string of multiline hereDoc string. Both variants unilize
+   <a href="http://daringfireball.net/projects/markdown/syntax">MarkDown</a> syntax</p>
+
+<p>Since markdown depends on line breaks in several ways, the hereDoc is used to form multiline string constants.</p>
+        <pre>
+<code>
+    description: function() {/*
+        #Here's the sample
+
+        Of multiline hereDoc constant. Yes, it's within the comment, within the function.
+        However, it's powered by dozens of magic Unicorns and therefore works.
+
+        You can use *markDown* here.
+    */}
+</code>
+            </pre>

@@ -1,0 +1,39 @@
+{
+    "author": {
+        "name": "Max Kitsch",
+        "email": "max.kitsch@gmail.com"
+    },
+    "name": "brest-docker",
+    "description": "Automatic documentation creation for the Brest library",
+    "version": "0.0.1",
+    "repository": {
+        "type" : "git",
+        "url": "https://github.com/MaximTovstashev/brest-docker.git"
+    },
+    "main": "./lib/docker",
+    "dependencies": {
+        "jayschema": "*",
+        "underscore": "1.5.1",
+        "jade": "*"
+    },
+    "devDependencies": {
+        "jayschema": "*",
+        "underscore": "*",
+        "jade": "*"
+    },
+    "keywords": [
+        "api",
+        "app",
+        "express",
+        "json-schema",
+        "rest",
+        "restful",
+        "router",
+        "schema",
+        "web"
+    ],
+    "optionalDependencies": {},
+    "engines": {
+        "node": "*"
+    }
+}

@@ -1,0 +1,98 @@
+mixin propertyBlock(schema,name,even)
+    - if (even=="even") even = "odd";
+    - else even = "even"
+    div(class="#{even}").well.propertyBlock
+        h4 #{name}
+        hr
+        dl
+            dt #{schema.title}
+            dd
+                i #{schema.description}
+
+        dl
+            dt Type:
+            dd #{schema.type}
+
+            if schema.items
+                if schema.items.type
+                    dt Items type:
+                    dd #{schema.items.type}
+                if schema.items.enum
+                    dt Allowed values:
+                    dd
+                        ul
+                            each val,i in schema.items.enum
+                                li "#{val}"
+
+        if schema.maximum
+            if schema.exclusiveMaximum
+                dt Value must be strictly less than #{schema.maximum}
+            else
+                dt Value must be less or equal than #{schema.maximum}
+            dd
+
+        if schema.minimum
+            if schema.exclusiveMinimum
+                dt Value must be strictly greater than #{schema.minimum}
+            else
+                dt Value must be greater or equal than #{schema.minimum}
+            dd
+
+        if schema.maxLength
+            dt String length must be no longer than #{schema.maxLength}
+            dd
+
+        if schema.minLength
+            dt String length must be at least #{schema.minLength} characters long
+            dd
+
+        if schema.minProperties
+            if schema.minProperties==1
+                dt Object must have at least one property
+            else
+                dt Object must have at least: #{schema.minProperties} properties
+            dd
+
+        if schema.maxProperties
+            if schema.maxProperties==1
+                dt Object must have no more than one property
+            else
+                dt Object must have no more than #{schema.maxProperties} properties
+            dd
+
+
+        if schema.uniqueItems
+            if schema.type=="array"
+                dt Each item must be unique
+            if schema.type=="object"
+                dt Each property must be unique
+            dd
+
+        if schema.pattern
+            dt Values must comply to pattern:
+            dd #{schema.pattern}
+
+        if schema.properties
+                h5 Properties:
+                if schema.required
+                    dt The following properties are required
+                    dd
+                        ul
+                            each req in schema.required
+                                li "#{req}"
+                each property, key in schema.properties
+                    mixin propertyBlock(property, key, even)
+
+        if schema.patternProperties
+            h5 Pattern properties:
+            each property, key in schema.patternProperties
+                mixin propertyBlock(property, key, even)
+
+mixin schemaBlock(schema,name,index)
+    div(id="accordion_#{name}_#{index}").accordion
+        div.accordion-group
+            div.accordion-heading
+                a(data-toggle="collapse", data-parent="accordion", href="#collapse_#{name}_#{index}").accordion-toggle Schema: #{schema.title}
+            div(id="collapse_#{name}_#{index}").accordion-body.collapse
+                div.accordion-inner
+                    mixin propertyBlock(schema, name, "even")
