@@ -31,6 +31,9 @@ JSON schema is quite unstable for now: it doesn't support internal links by #id'
 
 ##Changes
 
+#### 0.0.1-3
+ - Updated resource template to work with filter descriptions as objects
+
 #### 0.0.1-2
  - Fixed crash when API resource is referencing missing schema
  - Removed junk files from package

@@ -1,4 +1,3 @@
-include mixins/schema
 doctype 5
 html
     include includes/head
@@ -14,9 +13,9 @@ html
                 div.span10
                     h2 #{current}
                     div!= api.description
-                    -var methodIndex = 1
+                    -var methodIndex = 1;
                     each resource in api.resources
-                        -methodIndex++
+                        -methodIndex++;
                         div.well.description
                             if resource.stub
                                 span.stub.label.label-warning STUB
@@ -32,12 +31,18 @@ html
                                     dl
                                     each filter, name in resource.filters
                                         dt #{name}
-                                        dd #{filter}
+                                        if filter.description
+                                            dd
+                                                if filter.replaceMe && resource.noAuth
+                                                    span.noAuthOverride.label.label-warning noAuth override
+                                                    |&nbsp; #{filter.description}
+                                                else
+                                                    | #{filter.description}
+                                        else
+                                            dd #{filter}
                             if resource.schema
-                                if schemas[resource.schema]
-                                    mixin schemaBlock(schemas[resource.schema],resource.schema,methodIndex)
-                                else
-                                    span.label.label-important Missing schema "#{resource.schema}"
+                                include mixins/schema
+                                mixin schemaBlock(schemas[resource.schema],resource.schema,methodIndex)
                             hr
                             h5 Description
                             div.inset!= resource.description
@@ -47,3 +52,4 @@ html
     script $('.stub').tooltip({title: "This method is stub and will be implemented later"});
     script $('.obsolete').tooltip({title: "This method is obsolete and will be removed soon"});
     script $('.noAuth').tooltip({title: "No authorization required for this method. Anyone can use it!"});
+    script $('.noAuthOverride').tooltip({title: "This filter may override noAuth directive if \"me\" is provided as filter value!"});
